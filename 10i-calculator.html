@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Calculator (9j)</title>
+    <style>
+      body {
+        font-family: Arial;
+        background-color: black;
+        color: white;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .calc-result {
+        font-size: 40px;
+        height: 50px;
+      }
+
+      .regular-button {
+        background-color: #333333;
+        border: none;
+        color: white;
+        font-size: 18px;
+        width: 45px;
+        height: 45px;
+        border-radius: 24px;
+        margin: 3px;
+        cursor: pointer;
+      }
+
+      .operation-button {
+        background-color: #fda00a;
+        border: none;
+        color: white;
+        font-size: 18px;
+        width: 45px;
+        height: 45px;
+        margin: 3px;
+        border-radius: 24px;
+        cursor: pointer;
+      }
+
+      .clear-button {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="js-calc-result calc-result"></p>
+
+    <p>
+      <button class="regular-button" onclick="updateCalculation('1');">
+        1
+      </button>
+      <button class="regular-button" onclick="updateCalculation('2');">
+        2
+      </button>
+      <button class="regular-button" onclick="updateCalculation('3');">
+        3
+      </button>
+      <button class="operation-button" onclick="updateCalculation(' + ');">
+        +
+      </button>
+    </p>
+
+    <p>
+      <button class="regular-button" onclick="updateCalculation('4');">
+        4
+      </button>
+      <button class="regular-button" onclick="updateCalculation('5');">
+        5
+      </button>
+      <button class="regular-button" onclick="updateCalculation('6');">
+        6
+      </button>
+      <button class="operation-button" onclick="updateCalculation(' - ');">
+        -
+      </button>
+    </p>
+
+    <p>
+      <button class="regular-button" onclick="updateCalculation('7');">
+        7
+      </button>
+      <button class="regular-button" onclick="updateCalculation('8');">
+        8
+      </button>
+      <button class="regular-button" onclick="updateCalculation('9');">
+        9
+      </button>
+      <button class="operation-button" onclick="updateCalculation(' * ');">
+        *
+      </button>
+    </p>
+
+    <p>
+      <button class="regular-button" onclick="updateCalculation('0');">
+        0
+      </button>
+      <button class="regular-button" onclick="updateCalculation('.');">
+        .
+      </button>
+
+      <button
+        class="regular-button"
+        onclick="
+          calculation = eval(calculation);
+          calcResultElement.innerHTML = calculation;
+          localStorage.setItem('calculation', calculation);
+        "
+      >
+        =
+      </button>
+
+      <button class="operation-button" onclick="updateCalculation(' / ');">
+        /
+      </button>
+    </p>
+
+    <p>
+      <button
+        class="regular-button clear-button"
+        onclick="calculation = '';
+        localStorage.removeItem('calculation');
+        console.log('Cleared.');
+        calcResultElement.innerHTML = calculation;"
+      >
+        Clear
+      </button>
+    </p>
+
+    <script>
+      let calculation = localStorage.getItem('calculation') || '';
+      const calcResultElement = document.querySelector('.js-calc-result');
+      calcResultElement.innerHTML = calculation;
+
+      function updateCalculation(token) {
+        calculation += token;
+        localStorage.setItem('calculation', calculation);
+        calcResultElement.innerHTML = calculation;
+      }
+    </script>
+  </body>
+</html>
